@@ -32,8 +32,8 @@ docker run -it --rm -v ~/fs:/fs fs-src /bin/bash
 ```
 
 Then build FreeSurfer.  Might have to tweak:
-  - `-DGFORTRAN_LIBRARIES="/usr/lib/gcc/x86_64-redhat-linux/4.8.2/libgfortran.so"`
-
+  - `-DGFORTRAN_LIBRARIES="/usr/lib/gcc/ppc64le-redhat-linux/4.8.2/libgfortran.so"`
+  
 ```
 cd /fs/freesurfer
 rm -f ./CMakeCache.txt
@@ -45,7 +45,10 @@ cmake . \
   -DDISTRIBUTE_FSPYTHON=OFF \
   -DCMAKE_INSTALL_PREFIX="/fs/bin" \
   -DFS_PACKAGES_DIR="/usr" \
-  -DGFORTRAN_LIBRARIES="/usr/lib/gcc/x86_64-redhat-linux/4.8.2/libgfortran.so"
+  -DPPC64=ON \
+  -DCMAKE_CXX_FLAGS="-DPPC64" \
+  -DCMAKE_C_FLAGS="-DPPC64" \
+  -DGFORTRAN_LIBRARIES="/usr/lib/gcc/ppc64le-redhat-linux/4.8.2/libgfortran.so"
 make -j 4
 make install
 ```
