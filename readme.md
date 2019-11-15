@@ -14,12 +14,14 @@ It gets tagged as `fs-src`
 
 ## Setup
 
+```
 mkdir ~/fs
 cd ~/fs
 mkdir bin
 git clone https://github.com/freesurfer/freesurfer.git
 cd freesurfer
 git checkout dev
+```
 
 TODO: get the Freesurfer git annex data (this will compile and install, recon-all wont run without it.
 
