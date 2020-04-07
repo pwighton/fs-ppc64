@@ -2,9 +2,11 @@
 
 Compile FreeSurfer on ppc64.  
 
-Using the docker container in this repo, which compiles itk 4.13 from source
- and mostly following along here:
-  - https://github.com/corticometrics/fs-docker
+Using the docker container in this repo, which compiles itk 4.13 from source and mostly following along [here](https://github.com/corticometrics/fs-docker) with minor modifications to the [FreeSurfer dev branch](https://github.com/pwighton/freesurfer/tree/20191115-ppc64) which
+  - disable the compilation of `mri_watershed`
+    - this is the only binary that includes `affine.hpp` which seems hard coded to x86
+  - diabled staticlly linking of fortran binaries
+    - hard coded for now, ideally this would be a cmake option that can be set independently of architecture
 
 ## Build container
 
@@ -18,9 +20,9 @@ It gets tagged as `fs-src`
 mkdir ~/fs
 cd ~/fs
 mkdir bin
-git clone https://github.com/freesurfer/freesurfer.git
+git clone git@github.com:pwighton/freesurfer.git
 cd freesurfer
-git checkout dev
+git checkout 20191115-ppc64
 ```
 
 TODO: get the Freesurfer git annex data (this will compile and install, recon-all wont run without it.
